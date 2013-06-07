@@ -90,7 +90,8 @@ class WordCloud {
 
     // Crop the image
     list($x1, $y1, $x2, $y2) = $this->mask->get_bounding_box();
-    $image2 = imagecreatetruecolor(abs($x2 - $x1), abs($y2 - $y1));
+    //$image2 = imagecreatetruecolor(abs($x2 - $x1), abs($y2 - $y1));
+	$image2 = imagecreatetruecolor($this->width, $this->height);
     
     //Set the flag to save full alpha channel information (as opposed to single-color transparency) when saving PNG images
     imagesavealpha($image2, true);
@@ -98,7 +99,12 @@ class WordCloud {
     $trans_colour = imagecolorallocatealpha($image2, $this->imagecolor[0],$this->imagecolor[1], $this->imagecolor[2], $this->imagecolor[3]);
     imagefill($image2, 0, 0, $trans_colour);
     
-    imagecopy($image2 ,$this->image, 0, 0, $x1, $y1, abs($x2 - $x1), abs($y2 - $y1));
+    //imagecopy($image2 ,$this->image, 0, 0, $x1, $y1, abs($x2 - $x1), abs($y2 - $y1));
+	$cropWidth = abs($x2 - $x1);
+	$cropHeight = abs($y2 - $y1);
+	$posX = ($this->width - $cropWidth) / 2;
+	$posY = ($this->height - $cropHeight) / 2;
+	imagecopy($image2 ,$this->image, $posX, $posY, $x1, $y1, $cropWidth, $cropHeight);
 
 
     
