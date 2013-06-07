@@ -33,6 +33,8 @@ ORDER BY t.effectiveDateDue, f.name, p.name, c.name
 
 rm *.png
 
-/usr/bin/php -f tagcloud.php tmp.txt 1280 800
+IMG=$(/usr/bin/php -f ./tagcloud.php tmp.txt 1280 800)
+echo "$IMG"
+./setWallpaper "$IMG"
 
 rm tmp.txt

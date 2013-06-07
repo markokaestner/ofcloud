@@ -31,4 +31,5 @@ $cloud->render($palette);
 
 $img = getcwd() . '/ofcloud' . rand(100, 999) . '.png';
 imagepng($cloud->get_image(), $img);
+echo $img;
 ?>
